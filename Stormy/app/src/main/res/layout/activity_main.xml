@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name = "weather"
+            type = "com.meghangillwrites.stormy.weather.Current"/>
+    </data>
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/appBackground"
+        tools:context=".ui.MainActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontalGuideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.12"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/locationValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@{weather.locationLabel, default = `Ridgewood, NY`}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="@id/horizontalGuideline1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/iconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/locationValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/snow" />
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/locationValue"
+            app:layout_constraintEnd_toEndOf="@+id/locationValue"
+            app:layout_constraintTop_toBottomOf="@id/locationValue"
+            app:layout_constraintBottom_toTopOf="@id/currentTemperatureValue"
+            android:text="@{`The current time is ` + weather.formattedTime + `. The weather is `, default = `At 5:00PM it will be `}"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/half_white"/>
+
+        <TextView
+            android:id="@+id/currentTemperatureValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="30dp"
+            android:text="@{String.valueOf(Math.round(weather.currentTemperature)), default = `0`}"
+            android:textColor="@color/white"
+            android:textSize="150sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/locationValue" />
+
+        <ImageView
+            android:id="@+id/degreeImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            app:layout_constraintStart_toEndOf="@+id/currentTemperatureValue"
+            app:layout_constraintTop_toTopOf="@+id/currentTemperatureValue"
+            app:srcCompat="@drawable/degree" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/verticalGuideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            app:layout_constraintGuide_percent="0.33819953"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/verticalGuideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <TextView
+            android:id="@+id/maxTempLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:text="MAXIMUM"
+            android:textColor="@color/half_white"
+            app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
+            app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+            app:layout_constraintTop_toBottomOf="@+id/currentTemperatureValue"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:id="@+id/maxTempValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="@{String.valueOf(Math.round(weather.temperatureMaximum)), default = `67`}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/maxTempLabel"
+            app:layout_constraintStart_toStartOf="@+id/maxTempLabel"
+            app:layout_constraintTop_toBottomOf="@+id/maxTempLabel" />
+
+        <ImageView
+            android:id="@+id/maxTempDegreeImageView"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintStart_toEndOf="@+id/maxTempValue"
+            app:layout_constraintTop_toTopOf="@+id/maxTempValue"
+            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/degree" />
+
+        <TextView
+            android:id="@+id/minTempLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:text="MINIMUM"
+            android:textColor="@color/half_white"
+            app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
+            app:layout_constraintStart_toStartOf="@+id/verticalGuideline2"
+            app:layout_constraintTop_toBottomOf="@+id/currentTemperatureValue"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:id="@+id/minTempValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="@{String.valueOf(Math.round(weather.temperatureMinimum)), default = `48`}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/minTempLabel"
+            app:layout_constraintStart_toStartOf="@+id/minTempLabel"
+            app:layout_constraintTop_toBottomOf="@+id/minTempLabel" />
+
+        <ImageView
+            android:id="@+id/minTempDegreeImageView"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/minTempValue"
+            app:layout_constraintTop_toTopOf="@+id/minTempValue"
+            app:srcCompat="@drawable/degree" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/verticalGuideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            app:layout_constraintGuide_percent="0.10" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/verticalGuideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            app:layout_constraintGuide_percent="0.90" />
+
+        <TextView
+            android:id="@+id/summaryValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@{`During the day it will be ` + weather.iconPhraseDay.toLowerCase() + `. Tonight will be ` + weather.iconPhraseNight.toLowerCase() + `. `, default = `During the day it will be sunny and warm. At night it be be cool.`}"
+            android:textColor="@color/half_white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/minTempValue"
+            app:layout_constraintStart_toEndOf="@id/verticalGuideline3"
+            app:layout_constraintEnd_toStartOf="@id/verticalGuideline4"/>
+
+        <TextView
+            android:id="@+id/accuweatherAttribution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="@string/accuweather_message"
+            android:textColor="@color/white"
+            android:textColorLink="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.535"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/refreshImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="refreshOnClick"
+            app:layout_constraintBottom_toTopOf="@+id/locationValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/refresh" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+   </layout>
